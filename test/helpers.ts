@@ -1,6 +1,6 @@
 import * as G from '../src/Guard'
-import * as D from '../src/Decoder'
-import * as E from '../src/Encoder'
+import * as D from "io-ts/src/Decoder2"
+import * as E from "io-ts/src/Encoder"
 import { pipe } from 'fp-ts/lib/pipeable'
 
 // -------------------------------------------------------------------------------------

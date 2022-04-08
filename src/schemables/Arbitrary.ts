@@ -1,10 +1,9 @@
 import * as fc from 'fast-check'
 import { ReadonlyNonEmptyArray } from 'fp-ts/lib/ReadonlyNonEmptyArray'
-import * as D from '../src/Decoder2'
-import * as DE from '../src/DecodeError2'
-import { Schemable1, WithUnknownContainers1, WithUnion1 } from '../src/Schemable'
-
-// TODO: move to io-ts-contrib in v3
+import * as D from 'io-ts/src/Decoder2'
+import * as DE from 'io-ts/src/DecodeError2'
+import { Schemable1, WithUnknownContainers1, WithUnion1, WithRefine1 } from '../Schemable'
+import { Refinement } from 'fp-ts/lib/function'
 
 // -------------------------------------------------------------------------------------
 // model
@@ -49,6 +48,9 @@ export const literal = <A extends ReadonlyNonEmptyArray<DE.Literal>>(...values: 
 // -------------------------------------------------------------------------------------
 // combinators
 // -------------------------------------------------------------------------------------
+
+export const refine = <A, B extends A>(refinement: Refinement<A, B>) => (from: Arbitrary<A>): Arbitrary<B> =>
+  from.filter(refinement)
 
 export const nullable = <A>(or: Arbitrary<A>): Arbitrary<null | A> => fc.oneof(fc.constant(null), or)
 
@@ -136,3 +138,12 @@ export const WithUnknownContainers: WithUnknownContainers1<URI> = {
 export const WithUnion: WithUnion1<URI> = {
   union: union as any
 }
+
+/**
+ * @category instances
+ * @since 2.2.8
+ */
+export const WithRefine: WithRefine1<URI> = {
+  refine: refine as any
+}
+

@@ -11,10 +11,9 @@
 import { Refinement } from 'fp-ts/lib/function'
 import { pipe } from 'fp-ts/lib/pipeable'
 import { ReadonlyNonEmptyArray } from 'fp-ts/lib/ReadonlyNonEmptyArray'
-import * as D from './poc'
+import * as D from 'io-ts/src/Decoder2'
+import * as DE from 'io-ts/src/DecodeError2'
 import { Schemable1, WithUnion1, WithUnknownContainers1 } from './Schemable'
-
-// TODO: move to io-ts-contrib in v3
 
 // -------------------------------------------------------------------------------------
 // model
@@ -36,7 +35,7 @@ export interface Guard<I, A extends I> {
  * @category constructors
  * @since 2.2.0
  */
-export const literal = <A extends ReadonlyNonEmptyArray<D.Literal>>(...values: A): Guard<unknown, A[number]> => ({
+export const literal = <A extends ReadonlyNonEmptyArray<DE.Literal>>(...values: A): Guard<unknown, A[number]> => ({
   is: (u: unknown): u is A[number] => values.findIndex((a) => a === u) !== -1
 })
 

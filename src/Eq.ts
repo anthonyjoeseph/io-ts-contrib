@@ -11,7 +11,7 @@
 import * as E from 'fp-ts/lib/Eq'
 import * as RA from 'fp-ts/lib/ReadonlyArray'
 import * as RR from 'fp-ts/lib/ReadonlyRecord'
-import * as D from './poc'
+import * as D from 'io-ts/src/Decoder2'
 import { WithUnknownContainers1 } from './Schemable'
 import { Schemable1 } from './Schemable'
 
