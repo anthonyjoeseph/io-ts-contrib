@@ -3,7 +3,8 @@ import { identity } from 'fp-ts/lib/function'
 import { pipe } from 'fp-ts/lib/pipeable'
 import * as R from 'fp-ts/lib/ReadonlyRecord'
 import { JSONSchema7 } from 'json-schema'
-import * as S from '../src/Schemable'
+import * as DE from 'io-ts/src/DecodeError2'
+import * as S from '../Schemable'
 
 // -------------------------------------------------------------------------------------
 // model
@@ -17,7 +18,7 @@ export interface JsonSchema<A> {
 // constructors
 // -------------------------------------------------------------------------------------
 
-export function literal<A extends readonly [S.Literal, ...ReadonlyArray<S.Literal>]>(
+export function literal<A extends readonly [DE.Literal, ...ReadonlyArray<DE.Literal>]>(
   ...values: A
 ): JsonSchema<A[number]> {
   return {
@@ -144,7 +145,7 @@ export function lazy<A>(id: string, f: () => JsonSchema<A>): JsonSchema<A> {
   return {
     compile: (definitions) => {
       if (definitions !== undefined) {
-        if (definitions.hasOwnProperty(id)) {
+        if (Object.prototype.hasOwnProperty.call(definitions, id)) {
           return C.make({ $ref })
         }
         definitions[id] = undefined

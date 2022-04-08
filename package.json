@@ -37,9 +37,12 @@
     "url": "https://github.com/gcanti/io-ts/issues"
   },
   "homepage": "https://github.com/gcanti/io-ts",
-  "dependencies": {},
+  "dependencies": {
+    "io-ts": "git://github.com/gcanti/io-ts.git#poc"
+  },
   "peerDependencies": {
-    "fp-ts": "^2.5.0"
+    "fp-ts": "^2.5.0",
+    "io-ts": "^2.2.16"
   },
   "devDependencies": {
     "@types/glob": "^7.1.3",

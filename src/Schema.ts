@@ -9,7 +9,7 @@
  * @since 2.2.0
  */
 import { HKT, Kind, Kind2, URIS, URIS2 } from 'fp-ts/lib/HKT'
-import * as D from './Decoder2'
+import * as D from 'io-ts/src/Decoder2'
 import { Schemable, Schemable1, Schemable2C } from './Schemable'
 
 // TODO: move to io-ts-contrib in v3

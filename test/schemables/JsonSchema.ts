@@ -1,6 +1,6 @@
 import * as assert from 'assert'
 import Ajv from 'ajv'
-import * as J from './JsonSchema'
+import * as J from '../../src/schemables/JsonSchema'
 import * as C from 'fp-ts/lib/Const'
 import { pipe } from 'fp-ts/lib/pipeable'
 

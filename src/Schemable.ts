@@ -8,9 +8,10 @@
  *
  * @since 2.2.0
  */
+import { Refinement } from 'fp-ts/lib/function'
 import { HKT, Kind, Kind2, URIS, URIS2 } from 'fp-ts/lib/HKT'
 import { ReadonlyNonEmptyArray } from 'fp-ts/lib/ReadonlyNonEmptyArray'
-import * as DE from './DecodeError2'
+import * as DE from 'io-ts/src/DecodeError2'
 
 /**
  * @since 2.2.3
@@ -132,4 +133,28 @@ export interface WithUnion2C<S extends URIS2, E> {
   readonly union: <A extends readonly [unknown, ...ReadonlyArray<unknown>]>(
     ...members: { [K in keyof A]: Kind2<S, E, A[K]> }
   ) => Kind2<S, E, A[number]>
+}
+
+/**
+ * @since 2.2.3
+ */
+ export interface WithRefine<S> {
+  readonly refine: <A, B extends A>(refinement: Refinement<A, B>, id: string) => (from: HKT<S, A>) => HKT<S, B>
+}
+
+/**
+ * @since 2.2.3
+ */
+export interface WithRefine1<S extends URIS> {
+  readonly refine: <A, B extends A>(refinement: Refinement<A, B>, id: string) => (from: Kind<S, A>) => Kind<S, B>
+}
+
+/**
+ * @since 2.2.8
+ */
+export interface WithRefine2C<S extends URIS2, E> {
+  readonly refine: <A, B extends A>(
+    refinement: Refinement<A, B>,
+    id: string
+  ) => (from: Kind2<S, E, A>) => Kind2<S, E, B>
 }
