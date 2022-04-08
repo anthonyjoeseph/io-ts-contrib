@@ -3,7 +3,7 @@ import { ReadonlyNonEmptyArray } from 'fp-ts/lib/ReadonlyNonEmptyArray'
 import * as D from 'io-ts/src/Decoder2'
 import * as DE from 'io-ts/src/DecodeError2'
 import { Schemable1, WithUnknownContainers1, WithUnion1, WithRefine1 } from '../Schemable'
-import { Refinement } from 'fp-ts/lib/function'
+import { identity, Refinement } from 'fp-ts/lib/function'
 
 // -------------------------------------------------------------------------------------
 // model
@@ -91,6 +91,8 @@ export function sum<T extends string>(
   return (members: Record<string, Arbitrary<any>>) => fc.oneof(...Object.keys(members).map((k) => members[k]))
 }
 
+export const readonly: <A>(arb: Arbitrary<A>) => Arbitrary<Readonly<A>> = identity
+
 // -------------------------------------------------------------------------------------
 // instances
 // -------------------------------------------------------------------------------------
@@ -119,7 +121,8 @@ export const Schemable: Schemable1<URI> = {
   nullable,
   intersect,
   lazy: (_, f) => lazy(f),
-  sum
+  sum,
+  readonly
 }
 
 /**
@@ -146,4 +149,3 @@ export const WithUnion: WithUnion1<URI> = {
 export const WithRefine: WithRefine1<URI> = {
   refine: refine as any
 }
-

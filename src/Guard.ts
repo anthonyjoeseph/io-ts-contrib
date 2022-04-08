@@ -8,7 +8,7 @@
  *
  * @since 2.2.0
  */
-import { Refinement } from 'fp-ts/lib/function'
+import { identity, Refinement } from 'fp-ts/lib/function'
 import { pipe } from 'fp-ts/lib/pipeable'
 import { ReadonlyNonEmptyArray } from 'fp-ts/lib/ReadonlyNonEmptyArray'
 import * as D from 'io-ts/src/Decoder2'
@@ -26,6 +26,20 @@ import { Schemable1, WithUnion1, WithUnknownContainers1 } from './Schemable'
 export interface Guard<I, A extends I> {
   is: (i: I) => i is A
 }
+
+// -------------------------------------------------------------------------------------
+// utils
+// -------------------------------------------------------------------------------------
+
+/**
+ * @since 2.2.2
+ */
+export type TypeOf<G> = G extends Guard<any, infer A> ? A : never
+
+/**
+ * @since 2.2.8
+ */
+export type InputOf<G> = G extends Guard<infer I, any> ? I : never
 
 // -------------------------------------------------------------------------------------
 // constructors
@@ -224,6 +238,12 @@ export const sum = <T extends string>(tag: T) => <A>(
     })
   )
 
+/**
+ * @category combinators
+ * @since 2.2.15
+ */
+export const readonly: <I, A extends I>(guard: Guard<I, A>) => Guard<I, Readonly<A>> = identity
+
 // -------------------------------------------------------------------------------------
 // instance operations
 // -------------------------------------------------------------------------------------
@@ -274,7 +294,8 @@ export const Schemable: Schemable1<'io-ts/ToGuard'> = {
   nullable,
   intersect,
   lazy: (_, f) => lazy(f),
-  sum
+  sum,
+  readonly
 }
 
 /**

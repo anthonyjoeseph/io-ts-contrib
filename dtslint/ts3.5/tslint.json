@@ -22,6 +22,7 @@
     "function-constructor": false,
     "invalid-void": false,
     "no-construct": false,
-    "max-line-length": false
+    "max-line-length": false,
+    "no-null-undefined-union": false
   }
 }

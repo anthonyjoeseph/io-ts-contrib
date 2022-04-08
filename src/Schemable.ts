@@ -33,6 +33,7 @@ export interface Schemable<S> {
   readonly sum: <T extends string>(
     tag: T
   ) => <A>(members: { [K in keyof A]: HKT<S, A[K] & Record<T, K>> }) => HKT<S, A[keyof A]>
+  readonly readonly: <A>(sa: HKT<S, A>) => HKT<S, Readonly<A>>
 }
 
 /**
@@ -55,6 +56,7 @@ export interface Schemable1<S extends URIS> {
   readonly sum: <T extends string>(
     tag: T
   ) => <A>(members: { [K in keyof A]: Kind<S, A[K] & Record<T, K>> }) => Kind<S, A[keyof A]>
+  readonly readonly: <A>(sa: Kind<S, A>) => Kind<S, Readonly<A>>
 }
 
 /**
@@ -82,6 +84,7 @@ export interface Schemable2C<S extends URIS2, E> {
   readonly sum: <T extends string>(
     tag: T
   ) => <A>(members: { [K in keyof A]: Kind2<S, E, A[K] & Record<T, K>> }) => Kind2<S, E, A[keyof A]>
+  readonly readonly: <A>(sa: Kind2<S, E, A>) => Kind2<S, E, Readonly<A>>
 }
 
 /**
@@ -138,7 +141,7 @@ export interface WithUnion2C<S extends URIS2, E> {
 /**
  * @since 2.2.3
  */
- export interface WithRefine<S> {
+export interface WithRefine<S> {
   readonly refine: <A, B extends A>(refinement: Refinement<A, B>, id: string) => (from: HKT<S, A>) => HKT<S, B>
 }
 

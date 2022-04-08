@@ -1,4 +1,4 @@
-import { Schemable, WithUnknownContainers, memoize, WithRefine, WithUnion } from '../../src/Schemable'
+import { Schemable, WithUnknownContainers, WithRefine, WithUnion } from '../../src/Schemable'
 import { HKT } from 'fp-ts/lib/HKT'
 import { pipe } from 'fp-ts/lib/pipeable'
 
@@ -9,7 +9,7 @@ interface Schema<A> {
 export type TypeOf<S> = S extends Schema<infer A> ? A : never
 
 function make<A>(f: Schema<A>): Schema<A> {
-  return memoize(f)
+  return f
 }
 
 //

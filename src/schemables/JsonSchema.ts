@@ -19,13 +19,14 @@ export interface JsonSchema<A> {
 // constructors
 // -------------------------------------------------------------------------------------
 
-export function literal<A extends ReadonlyNonEmptyArray<DE.Literal>>(
-  ...values: A
-): JsonSchema<A[number]> {
+export function literal<A extends ReadonlyNonEmptyArray<DE.Literal>>(...values: A): JsonSchema<A[number]> {
   return {
-    compile: () => C.make({ enum: values.map((v): Exclude<DE.Literal, undefined | symbol> => 
-      typeof v === 'symbol' || typeof v === 'undefined' ? null : v
-    )})
+    compile: () =>
+      C.make({
+        enum: values.map(
+          (v): Exclude<DE.Literal, undefined | symbol> => (typeof v === 'symbol' || typeof v === 'undefined' ? null : v)
+        )
+      })
   }
 }
 
@@ -206,5 +207,6 @@ export const Schemable: S.Schemable1<URI> & S.WithUnknownContainers1<URI> & S.Wi
   intersect,
   sum,
   lazy,
-  union: union as S.WithUnion1<URI>['union']
+  union: union as S.WithUnion1<URI>['union'],
+  readonly
 }

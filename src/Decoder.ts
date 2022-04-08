@@ -1,7 +1,7 @@
 import * as D from 'io-ts/src/Decoder2'
 import * as DE from 'io-ts/src/DecodeError2'
 import { Schemable2C, WithUnion2C, WithUnknownContainers2C } from './Schemable'
-
+import { identity } from 'fp-ts/lib/function'
 
 // TODO: move to io-ts-contrib in v3
 
@@ -9,7 +9,7 @@ import { Schemable2C, WithUnion2C, WithUnknownContainers2C } from './Schemable'
  * @category instances
  * @since 2.2.17
  */
- export const getSchemable = <E = never>(): Schemable2C<'io-ts/ToDecoder', DE.DecodeError<E | DE.BuiltinE>> => {
+export const getSchemable = <E = never>(): Schemable2C<'io-ts/ToDecoder', DE.DecodeError<E | DE.BuiltinE>> => {
   return {
     URI: 'io-ts/ToDecoder',
     _E: undefined as any,
@@ -25,7 +25,8 @@ import { Schemable2C, WithUnion2C, WithUnknownContainers2C } from './Schemable'
     nullable: D.nullable,
     intersect: D.intersect,
     lazy: D.lazy,
-    sum: D.sum as any
+    sum: D.sum as any,
+    readonly: identity as any
   }
 }
 

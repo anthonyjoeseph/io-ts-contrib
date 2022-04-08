@@ -9,11 +9,11 @@
  * @since 2.2.2
  */
 import * as E from 'fp-ts/lib/Eq'
+import { identity } from 'fp-ts/lib/function'
 import * as RA from 'fp-ts/lib/ReadonlyArray'
 import * as RR from 'fp-ts/lib/ReadonlyRecord'
 import * as D from 'io-ts/src/Decoder2'
-import { WithUnknownContainers1 } from './Schemable'
-import { Schemable1 } from './Schemable'
+import { Schemable1, WithUnknownContainers1 } from './Schemable'
 
 import Eq = E.Eq
 
@@ -149,6 +149,12 @@ export const sum = <T extends string>(
     })
 }
 
+/**
+ * @category combinators
+ * @since 2.2.15
+ */
+export const readonly: <A>(eq: Eq<A>) => Eq<Readonly<A>> = identity
+
 // -------------------------------------------------------------------------------------
 // instances
 // -------------------------------------------------------------------------------------
@@ -158,8 +164,6 @@ declare module 'fp-ts/lib/HKT' {
     readonly 'io-ts/ToEq': Eq<A>
   }
 }
-
-// TODO: move to io-ts-contrib in v3
 
 /**
  * @category instances
@@ -179,7 +183,8 @@ export const Schemable: Schemable1<'io-ts/ToEq'> = {
   nullable,
   intersect,
   lazy: (_, f) => lazy(f),
-  sum
+  sum,
+  readonly
 }
 
 /**

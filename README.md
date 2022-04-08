@@ -1,43 +1,30 @@
-[![build status](https://img.shields.io/travis/gcanti/io-ts/master.svg?style=flat-square)](https://travis-ci.org/gcanti/io-ts)
-[![dependency status](https://img.shields.io/david/gcanti/io-ts.svg?style=flat-square)](https://david-dm.org/gcanti/io-ts)
-![npm downloads](https://img.shields.io/npm/dm/io-ts.svg)
+A community driven utility package for [io-ts](https://github.com/gcanti/fp-ts)
 
-<!-- START doctoc generated TOC please keep comment here to allow auto update -->
-<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+# Installation
 
-- [Installation](#installation)
-- [Usage](#usage)
-  - [Stable features](#stable-features)
-  - [Experimental features (version `2.2+`)](#experimental-features-version-22)
+To install the stable version:
 
-<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+```sh
+npm i fp-ts-contrib
+```
+
+**Note**. `io-ts-contrib` depends on [`io-ts`](https://github.com/gcanti/fp-ts), you must install `fp-ts` manually (`io-ts` is listed in `peerDependency`)
+
+# Documentation
+
+- [API reference](https://anthonyjoeseph.github.io/io-ts-contrib/)
 
 # Installation
 
 To install the stable version
 
 ```sh
-npm i io-ts fp-ts
+npm i io-ts-contrib io-ts fp-ts
 ```
 
-**Note**. [`fp-ts`](https://github.com/gcanti/fp-ts) is a peer dependency for `io-ts`
+**Note**. [`io-ts`](https://github.com/gcanti/io-ts) is a peer dependency for `io-ts-contrib`, and [`fp-ts`](https://github.com/gcanti/fp-ts) is a peer dependency for `io-ts`
 
 # Usage
 
-## Stable features
-
-- [`index.ts` module](index.md)
-
-## Experimental modules (version `2.2+`)
-
-Experimental modules (\*) are published in order to get early feedback from the community, see these tracking [issues](https://github.com/gcanti/io-ts/issues?q=label%3Av2.2+) for further discussions and enhancements.
-
-The experimental modules are **independent and backward-incompatible** with stable ones.
-
-- [`Decoder.ts` module](Decoder.md)
-- [`Encoder.ts` module](Encoder.md)
-- [`Codec.ts` module](Codec.md)
 - [`Eq.ts` module](Eq.md)
 - [`Schema.ts` module (advanced feature)](Schema.md)
-
-(\*) A feature tagged as _Experimental_ is in a high state of flux, you're at risk of it changing without notice.
