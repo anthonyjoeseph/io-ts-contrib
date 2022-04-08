@@ -97,4 +97,9 @@ describe('Eq', () => {
     assert.strictEqual(eq.equals({ _tag: 'A', a: 'a' }, { _tag: 'A', a: 'b' }), false)
     assert.strictEqual(eq.equals({ _tag: 'B', b: 1 }, { _tag: 'B', b: 2 }), false)
   })
+
+  it('readonly', () => {
+    const eq = E.readonly(E.struct({ a: E.string }))
+    assert.strictEqual(eq.equals({ a: 'a' }, { a: 'a' }), true)
+  })
 })

@@ -1,11 +1,11 @@
 import * as fc from 'fast-check'
 import { pipe } from 'fp-ts/lib/pipeable'
 import { isLeft } from 'fp-ts/lib/These'
-import { getSchemable } from '../../src/Decoder'
-import * as Eq from '../../src/Eq'
-import * as G from '../../src/Guard'
-import { interpreter, make, Schema } from '../../src/Schema'
-import * as A from '../../src/schemables/Arbitrary'
+import { getSchemable } from '../src/Decoder'
+import * as Eq from '../src/Eq'
+import * as G from '../src/Guard'
+import { interpreter, make, Schema } from '../src/Schema'
+import * as A from '../src/Arbitrary'
 
 function check<A>(schema: Schema<A>): void {
   const arb = interpreter(A.Schemable)(schema)

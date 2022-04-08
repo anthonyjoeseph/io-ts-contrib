@@ -119,7 +119,7 @@ export const tuple = <A extends ReadonlyArray<unknown>>(
   is: (u): u is A => Array.isArray(u) && u.length === components.length && components.every((c, i) => c.is(u[i]))
 })
 
-const refine = <I, A extends I, B extends A>(refinement: Refinement<A, B>) => (from: Guard<I, A>): Guard<I, B> => ({
+export const refine = <I, A extends I, B extends A>(refinement: Refinement<A, B>) => (from: Guard<I, A>): Guard<I, B> => ({
   is: (i: I): i is B => from.is(i) && refinement(i)
 })
 
@@ -242,7 +242,7 @@ export const sum = <T extends string>(tag: T) => <A>(
  * @category combinators
  * @since 2.2.15
  */
-export const readonly: <I, A extends I>(guard: Guard<I, A>) => Guard<I, Readonly<A>> = identity
+ export const readonly: <I, A extends I>(guard: Guard<I, A>) => Guard<I, Readonly<A>> = identity
 
 // -------------------------------------------------------------------------------------
 // instance operations
@@ -268,11 +268,24 @@ export const compose = <I, A extends I, B extends A>(to: Guard<A, B>) => (from: 
 // instances
 // -------------------------------------------------------------------------------------
 
-// TODO: move to io-ts-contrib in v3
+
+
+/**
+ * @category instances
+ * @since 2.2.0
+ */
+export const URI = 'io-ts/ToGuard'
+
+ /**
+  * @category instances
+  * @since 2.2.0
+  */
+export type URI = typeof URI
+
 
 declare module 'fp-ts/lib/HKT' {
   interface URItoKind<A> {
-    readonly 'io-ts/ToGuard': Guard<unknown, A>
+    readonly [URI]: Guard<unknown, A>
   }
 }
 
@@ -280,8 +293,8 @@ declare module 'fp-ts/lib/HKT' {
  * @category instances
  * @since 2.2.8
  */
-export const Schemable: Schemable1<'io-ts/ToGuard'> = {
-  URI: 'io-ts/ToGuard',
+export const Schemable: Schemable1<URI> = {
+  URI: URI,
   literal,
   string,
   number,
@@ -302,7 +315,7 @@ export const Schemable: Schemable1<'io-ts/ToGuard'> = {
  * @category instances
  * @since 2.2.8
  */
-export const WithUnknownContainers: WithUnknownContainers1<'io-ts/ToGuard'> = {
+export const WithUnknownContainers: WithUnknownContainers1<URI> = {
   UnknownArray,
   UnknownRecord
 }
@@ -311,6 +324,6 @@ export const WithUnknownContainers: WithUnknownContainers1<'io-ts/ToGuard'> = {
  * @category instances
  * @since 2.2.8
  */
-export const WithUnion: WithUnion1<'io-ts/ToGuard'> = {
+export const WithUnion: WithUnion1<URI> = {
   union: union as any
 }

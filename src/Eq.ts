@@ -9,6 +9,7 @@
  * @since 2.2.2
  */
 import * as E from 'fp-ts/lib/Eq'
+import { eqStrict } from 'fp-ts/lib/Eq'
 import { identity } from 'fp-ts/lib/function'
 import * as RA from 'fp-ts/lib/ReadonlyArray'
 import * as RR from 'fp-ts/lib/ReadonlyRecord'
@@ -155,43 +156,58 @@ export const sum = <T extends string>(
  */
 export const readonly: <A>(eq: Eq<A>) => Eq<Readonly<A>> = identity
 
-// -------------------------------------------------------------------------------------
-// instances
-// -------------------------------------------------------------------------------------
 
-declare module 'fp-ts/lib/HKT' {
-  interface URItoKind<A> {
-    readonly 'io-ts/ToEq': Eq<A>
+
+ // -------------------------------------------------------------------------------------
+ // instances
+ // -------------------------------------------------------------------------------------
+ 
+/**
+ * @category instances
+ * @since 2.2.7
+ */
+ export const URI = 'io-ts/ToDecoder'
+
+ /**
+ * @category instances
+ * @since 2.2.7
+ */
+ export type URI = typeof URI
+ 
+  declare module 'fp-ts/lib/HKT' {
+    interface URItoKind<A> {
+      readonly [URI]: Eq<A>
+    }
   }
-}
-
-/**
- * @category instances
- * @since 2.2.8
- */
-export const Schemable: Schemable1<'io-ts/ToEq'> = {
-  URI: 'io-ts/ToEq',
-  string,
-  number,
-  boolean,
-  literal: () => E.eqStrict,
-  tuple,
-  struct,
-  partial,
-  array,
-  record,
-  nullable,
-  intersect,
-  lazy: (_, f) => lazy(f),
-  sum,
-  readonly
-}
-
-/**
- * @category instances
- * @since 2.2.8
- */
-export const WithUnknownContainers: WithUnknownContainers1<'io-ts/ToEq'> = {
-  UnknownArray,
-  UnknownRecord
-}
+  
+  /**
+   * @category instances
+   * @since 2.2.8
+   */
+  export const Schemable: Schemable1<URI> = {
+    URI: URI,
+    string, 
+    number, 
+    boolean,
+    literal: () => eqStrict,
+    tuple,
+    struct, 
+    partial,
+    array,
+    record,
+    nullable,
+    intersect,
+    lazy: (_, f) => lazy(f),
+    sum,
+    readonly,
+  }
+  
+  /**
+   * @category instances
+   * @since 2.2.8
+   */
+  export const WithUnknownContainers: WithUnknownContainers1<URI> = {
+    UnknownArray,
+    UnknownRecord,
+  }
+  

@@ -2,11 +2,11 @@ module.exports = {
   preset: 'ts-jest',
   testEnvironment: 'node',
   collectCoverage: true,
-  collectCoverageFrom: ['src/**/*.ts', '!src/Schemable2.ts', '!src/poc.ts', '!src/Codec2.ts'],
+  collectCoverageFrom: ['src/**/*.ts', '!src/Schemable.ts'],
   transform: {
     '^.+\\.tsx?$': 'ts-jest'
   },
-  testRegex: 'test',
+  testRegex: 'test/(.*).ts',
   moduleFileExtensions: ['ts', 'js'],
   coverageThreshold: {
     global: {
@@ -18,10 +18,6 @@ module.exports = {
   },
   modulePathIgnorePatterns: [
     '2.1.x/helpers.ts',
-    'Arbitrary.ts',
-    'Arbitrary2.ts',
-    'helpers.ts',
-    'JsonSchema.ts',
     'util.ts'
   ]
 }
