@@ -3,7 +3,7 @@ import * as E from '../src/Eq'
 import { Eq } from 'fp-ts/lib/Eq'
 import { pipe } from 'fp-ts/lib/pipeable'
 
-describe('Eq2', () => {
+describe('Eq', () => {
   it('number', () => {
     const eq = E.number
     assert.deepStrictEqual(eq.equals(1, 1), true)

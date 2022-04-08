@@ -13,7 +13,7 @@ const NonEmptyString: G.Guard<string, NonEmptyString> = {
   is: (s): s is NonEmptyString => s.length > 0
 }
 
-describe('Guard2', () => {
+describe('Guard', () => {
   it('id', () => {
     const guard = G.id<string>()
     assert.strictEqual(guard.is('a'), true)

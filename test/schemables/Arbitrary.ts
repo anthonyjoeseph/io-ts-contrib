@@ -1,15 +1,15 @@
 import * as fc from 'fast-check'
 import { pipe } from 'fp-ts/lib/pipeable'
 import { isLeft } from 'fp-ts/lib/These'
-import * as D from '../src/Decoder2'
-import * as Eq from '../src/Eq'
-import * as G from '../src/Guard'
-import { interpreter, make, Schema } from '../src/Schema'
-import * as A from './Arbitrary2'
+import { getSchemable } from '../../src/Decoder';
+import * as Eq from '../../src/Eq'
+import * as G from '../../src/Guard'
+import { interpreter, make, Schema } from '../../src/Schema'
+import * as A from '../../src/schemables/Arbitrary'
 
 function check<A>(schema: Schema<A>): void {
   const arb = interpreter(A.Schemable)(schema)
-  const decoder = interpreter(D.getSchemable())(schema)
+  const decoder = interpreter(getSchemable())(schema)
   const guard = interpreter(G.Schemable)(schema)
   const eq = interpreter(Eq.Schemable)(schema)
   // decoders, guards and eqs should be aligned

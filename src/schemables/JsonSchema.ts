@@ -5,6 +5,7 @@ import * as R from 'fp-ts/lib/ReadonlyRecord'
 import { JSONSchema7 } from 'json-schema'
 import * as DE from 'io-ts/src/DecodeError2'
 import * as S from '../Schemable'
+import { ReadonlyNonEmptyArray } from 'fp-ts/lib/ReadonlyNonEmptyArray'
 
 // -------------------------------------------------------------------------------------
 // model
@@ -18,11 +19,13 @@ export interface JsonSchema<A> {
 // constructors
 // -------------------------------------------------------------------------------------
 
-export function literal<A extends readonly [DE.Literal, ...ReadonlyArray<DE.Literal>]>(
+export function literal<A extends ReadonlyNonEmptyArray<DE.Literal>>(
   ...values: A
 ): JsonSchema<A[number]> {
   return {
-    compile: () => C.make({ enum: [...values] })
+    compile: () => C.make({ enum: values.map((v): Exclude<DE.Literal, undefined | symbol> => 
+      typeof v === 'symbol' || typeof v === 'undefined' ? null : v
+    )})
   }
 }
 
@@ -195,7 +198,6 @@ export const Schemable: S.Schemable1<URI> & S.WithUnknownContainers1<URI> & S.Wi
   UnknownArray,
   UnknownRecord,
   nullable,
-  type: struct,
   struct,
   partial,
   record,
@@ -204,6 +206,5 @@ export const Schemable: S.Schemable1<URI> & S.WithUnknownContainers1<URI> & S.Wi
   intersect,
   sum,
   lazy,
-  readonly,
   union: union as S.WithUnion1<URI>['union']
 }
