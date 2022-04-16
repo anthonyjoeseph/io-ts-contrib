@@ -9,9 +9,9 @@
  * @since 2.2.0
  */
 import { Refinement } from 'fp-ts/lib/function'
-import { HKT, Kind, Kind2, URIS, URIS2 } from 'fp-ts/lib/HKT'
+import { HKT, Kind, Kind2, Kind3, URIS, URIS2, URIS3 } from 'fp-ts/lib/HKT'
 import { ReadonlyNonEmptyArray } from 'fp-ts/lib/ReadonlyNonEmptyArray'
-import * as DE from 'io-ts/src/DecodeError2'
+import * as DE from 'io-ts/src/DecodeError'
 
 /**
  * @since 2.2.3

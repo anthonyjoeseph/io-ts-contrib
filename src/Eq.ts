@@ -13,7 +13,7 @@ import { eqStrict } from 'fp-ts/lib/Eq'
 import { identity } from 'fp-ts/lib/function'
 import * as RA from 'fp-ts/lib/ReadonlyArray'
 import * as RR from 'fp-ts/lib/ReadonlyRecord'
-import * as D from 'io-ts/src/Decoder2'
+import * as D from 'io-ts/src/Decoder'
 import { Schemable1, WithUnknownContainers1 } from './Schemable'
 
 import Eq = E.Eq
@@ -166,7 +166,7 @@ export const readonly: <A>(eq: Eq<A>) => Eq<Readonly<A>> = identity
  * @category instances
  * @since 2.2.7
  */
- export const URI = 'io-ts/ToDecoder'
+ export const URI = 'io-ts/ToEq'
 
  /**
  * @category instances

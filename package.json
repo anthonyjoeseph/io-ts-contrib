@@ -1,7 +1,7 @@
 {
-  "name": "io-ts",
-  "version": "2.2.17",
-  "description": "TypeScript runtime type system for IO decoding/encoding",
+  "name": "io-ts-contrib",
+  "version": "0.0.1",
+  "description": "A community driven utility package for io-ts",
   "main": "lib/index.js",
   "module": "es6/index.js",
   "typings": "lib/index.d.ts",
@@ -29,17 +29,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/gcanti/io-ts.git"
+    "url": "https://github.com/anthonyjoeseph/io-ts-contrib.git"
   },
-  "author": "Giulio Canti <giulio.canti@gmail.com>",
+  "author": "Anthony Gabriele <anthonyjoeseph@gmail.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/gcanti/io-ts/issues"
+    "url": "https://github.com/anthonyjoeseph/io-ts-contrib/issues"
   },
-  "homepage": "https://github.com/gcanti/io-ts",
-  "dependencies": {
-    "io-ts": "git://github.com/gcanti/io-ts.git#poc"
-  },
+  "homepage": "https://github.com/anthonyjoeseph/io-ts-contrib",
   "peerDependencies": {
     "fp-ts": "^2.5.0",
     "io-ts": "^2.2.16"

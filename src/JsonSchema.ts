@@ -3,7 +3,7 @@ import { identity } from 'fp-ts/lib/function'
 import { pipe } from 'fp-ts/lib/pipeable'
 import * as R from 'fp-ts/lib/ReadonlyRecord'
 import { JSONSchema7 } from 'json-schema'
-import * as DE from 'io-ts/src/DecodeError2'
+import * as DE from 'io-ts/src/DecodeError'
 import * as S from './Schemable'
 import { ReadonlyNonEmptyArray } from 'fp-ts/lib/ReadonlyNonEmptyArray'
 

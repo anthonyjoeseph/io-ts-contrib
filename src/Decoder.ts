@@ -1,7 +1,6 @@
-import { Decoder, literal, string, number, boolean, tuple, struct, partial, array, record, nullable, intersect, lazy, sum, union, UnknownArray, UnknownRecord } from 'io-ts/src/Decoder2'
-import * as DE from 'io-ts/src/DecodeError2'
+import { Decoder, literal, string, number, boolean, tuple, struct, partial, array, record, nullable, intersect, lazy, sum, union, readonly, refine, UnknownArray, UnknownRecord } from 'io-ts/src/Decoder'
+import * as DE from 'io-ts/src/DecodeError'
 import { Schemable2C, WithRefine2C, WithUnion2C, WithUnknownContainers2C } from './Schemable'
-import { identity } from 'fp-ts/lib/function'
 
 // -------------------------------------------------------------------------------------
 // instances
@@ -20,8 +19,8 @@ export const URI = 'io-ts/ToDecoder'
 export type URI = typeof URI
  
 declare module 'fp-ts/lib/HKT' {
-  interface URItoKind3<R, E, A> {
-    readonly [URI]: Decoder<R, E, A>
+  interface URItoKind2<E, A> {
+    readonly [URI]: Decoder<unknown, E, A>
   }
 }
 
@@ -46,7 +45,7 @@ export const getSchemable = <E = never>(): Schemable2C<URI, DE.DecodeError<E | D
     intersect,
     lazy,
     sum: sum as any,
-    readonly: identity as any
+    readonly,
   }
 }
 

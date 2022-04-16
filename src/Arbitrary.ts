@@ -1,7 +1,7 @@
 import * as fc from 'fast-check'
 import { ReadonlyNonEmptyArray } from 'fp-ts/lib/ReadonlyNonEmptyArray'
-import * as D from 'io-ts/src/Decoder2'
-import * as DE from 'io-ts/src/DecodeError2'
+import * as D from 'io-ts/src/Decoder'
+import * as DE from 'io-ts/src/DecodeError'
 import { Schemable1, WithUnknownContainers1, WithUnion1, WithRefine1 } from './Schemable'
 import { identity, Refinement } from 'fp-ts/lib/function'
 
@@ -97,7 +97,7 @@ export const readonly: <A>(arb: Arbitrary<A>) => Arbitrary<Readonly<A>> = identi
 // instances
 // -------------------------------------------------------------------------------------
 
-export const URI = 'io-ts/toArbitrary'
+export const URI = 'io-ts/ToArbitrary'
 
 export type URI = typeof URI
 
